@@ -91,5 +91,25 @@
                 // "-oscale=4",
             ]
         },
+        {
+            "name": "restore",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "refcolorrestore.restore",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "-s",
+                "output/truck-restore/dataset",
+                "-d",
+                "output/truck-restore/results",
+                "--model",
+                "dualresnet",
+                "--model_destination",
+                "output/truck-restore/models",
+                // "-oscale=4",
+                "--save_image",
+            ]
+        },
     ]
 }

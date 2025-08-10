@@ -1,8 +1,6 @@
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
-import os
-from tqdm import tqdm
 
 from refcolorrestore.dataset import SavedRestorationDataset
 from refcolorrestore.shelf import model_dict
