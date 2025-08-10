@@ -53,3 +53,22 @@ class RestorationDataset:
         os.makedirs(image_dir, exist_ok=True)
         for idx in tqdm(range(len(self)), desc="Saving images"):
             self.save_image_tuple(idx, image_dir)
+
+
+class PreRenderedRestorationDataset(RestorationDataset):
+    def __init__(self, data_dir: str):
+        self.data_dir = data_dir
+
+    def __len__(self):
+        n = 0
+        while os.path.exists(os.path.join(self.data_dir, '{0:05d}'.format(n) + ".png")) and \
+                os.path.exists(os.path.join(self.data_dir, '{0:05d}'.format(n) + ".lr.png")) and \
+                os.path.exists(os.path.join(self.data_dir, '{0:05d}'.format(n) + ".gt.png")):
+            n += 1
+        return n
+
+    def __getitem__(self, idx):
+        color_distorted = torchvision.io.read_image(os.path.join(self.data_dir, '{0:05d}'.format(idx) + ".png"))
+        reference = torchvision.io.read_image(os.path.join(self.data_dir, '{0:05d}'.format(idx) + ".lr.png"))
+        ground_truth = torchvision.io.read_image(os.path.join(self.data_dir, '{0:05d}'.format(idx) + ".gt.png"))
+        return RestorationTuple(color_distorted, reference), ground_truth
