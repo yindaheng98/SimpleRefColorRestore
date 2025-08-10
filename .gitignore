@@ -3,6 +3,7 @@ output
 
 gaussian_splatting/
 extrinterp/
+reduced_3dgs/
 gscompressor/
 *.dist-info
 # Byte-compiled / optimized / DLL files
