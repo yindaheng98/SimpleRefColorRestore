@@ -1,3 +1,9 @@
+data
+output
+
+gaussian_splatting/
+extrinterp/
+*.dist-info
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
