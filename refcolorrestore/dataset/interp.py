@@ -39,7 +39,7 @@ class DualExtrinsicInterpolationDataset(DualCameraDataset):
             FoVy=self.FoVy,
             device=self.cameras[idx].R.device
         )
-        return camera_hr, camera_lr
+        return camera_lr, camera_hr
 
     def to(self, device):
         self.cameras = self.cameras.to(device)

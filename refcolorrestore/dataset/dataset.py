@@ -11,7 +11,7 @@ from .abc import DualCameraDataset, RestorationDataset, RestorationTuple
 
 
 class DualCameraRestorationDataset:
-    def __init__(self, cameras: DualCameraDataset, ground_truth_gaussians: GaussianModel, color_distorted_gaussians: GaussianModel):
+    def __init__(self, cameras: DualCameraDataset, color_distorted_gaussians: GaussianModel, ground_truth_gaussians: GaussianModel):
         self.cameras = cameras
         self.ground_truth_gaussians = ground_truth_gaussians
         self.color_distorted_gaussians = color_distorted_gaussians
@@ -27,9 +27,9 @@ class DualCameraRestorationDataset:
 
     def __getitem__(self, idx) -> Tuple[RestorationTuple, torch.FloatTensor]:
         lr_camera, hr_camera = self.cameras[idx]
-        color_distorted = self.color_distorted_gaussians(hr_camera)
-        ground_truth = self.ground_truth_gaussians(hr_camera)
-        reference = self.ground_truth_gaussians(lr_camera)
+        color_distorted = self.color_distorted_gaussians(hr_camera)['render']
+        ground_truth = self.ground_truth_gaussians(hr_camera)['render']
+        reference = self.ground_truth_gaussians(lr_camera)['render']
         return RestorationTuple(color_distorted, reference), ground_truth
 
     def save_image_tuple(self, idx, image_dir):
