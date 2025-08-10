@@ -68,7 +68,7 @@ class SavedRestorationDataset(RestorationDataset):
         return n
 
     def __getitem__(self, idx):
-        color_distorted = torchvision.io.read_image(os.path.join(self.data_dir, '{0:05d}'.format(idx) + ".png"))
-        reference = torchvision.io.read_image(os.path.join(self.data_dir, '{0:05d}'.format(idx) + ".lr.png"))
-        ground_truth = torchvision.io.read_image(os.path.join(self.data_dir, '{0:05d}'.format(idx) + ".gt.png"))
+        color_distorted = torchvision.io.read_image(os.path.join(self.data_dir, '{0:05d}'.format(idx) + ".png")) / 255.0
+        reference = torchvision.io.read_image(os.path.join(self.data_dir, '{0:05d}'.format(idx) + ".lr.png")) / 255.0
+        ground_truth = torchvision.io.read_image(os.path.join(self.data_dir, '{0:05d}'.format(idx) + ".gt.png")) / 255.0
         return RestorationTuple(color_distorted, reference), ground_truth

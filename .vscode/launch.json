@@ -75,5 +75,21 @@
                 "output/truck-restore/dataset"
             ]
         },
+        {
+            "name": "train",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "refcolorrestore.train",
+            "console": "integratedTerminal",
+            "args": [
+                "-s",
+                "output/truck-restore/dataset",
+                "-d",
+                "output/truck-restore/models",
+                "--model",
+                "dualresnet",
+                // "-oscale=4",
+            ]
+        },
     ]
 }
