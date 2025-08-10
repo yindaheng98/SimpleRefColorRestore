@@ -55,7 +55,7 @@ class RestorationDataset:
             self.save_image_tuple(idx, image_dir)
 
 
-class PreRenderedRestorationDataset(RestorationDataset):
+class SavedRestorationDataset(RestorationDataset):
     def __init__(self, data_dir: str):
         self.data_dir = data_dir
 
