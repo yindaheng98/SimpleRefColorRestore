@@ -45,10 +45,10 @@ if __name__ == "__main__":
     parser.add_argument("--interp_window_size", type=int, default=3)
     parser.add_argument("--use_intrinsics", type=str, default="0", help="Use intrinsics for rendering, can be an integer index or a dict with keys: image_height, image_width, FoVx, FoVy")
     parser.add_argument("--downsample", default=4, type=int)
+    parser.add_argument("--data_dir", required=True, type=str)
     args = parser.parse_args()
     load_ply = os.path.join(args.destination, "point_cloud", "iteration_" + str(args.iteration), "point_cloud.ply")
     load_ply_gt = os.path.join(args.destination_gt, "point_cloud", "iteration_" + str(args.iteration_gt), "point_cloud.ply")
-    save = os.path.join(args.destination, "ours_{}".format(args.iteration))
     with torch.no_grad():
         cameras, gaussians, gaussians_gt = prepare_rendering(
             sh_degree=args.sh_degree, source=args.source, device=args.device,
@@ -58,4 +58,5 @@ if __name__ == "__main__":
             use_intrinsics=eval(args.use_intrinsics)
         )
         dataset = DualCameraRestorationDataset(cameras=cameras, color_distorted_gaussians=gaussians, ground_truth_gaussians=gaussians_gt)
-        dataset.save_dataset(save)
+        os.makedirs(args.data_dir, exist_ok=True)
+        dataset.save_dataset(args.data_dir)

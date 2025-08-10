@@ -19,12 +19,13 @@
                 "--num_clusters_scaling=1024",
                 "--num_clusters_rotation_re=256",
                 "--num_clusters_rotation_im=1024",
-                "--num_clusters_opacity=256",
-                "--num_clusters_features_dc=512",
+                "--num_clusters_opacity=8",
+                "--num_clusters_features_dc=16",
                 "--num_clusters_features_rest",
-                "256",
-                "128",
-                "64"
+                "2",
+                "2",
+                "2",
+                // simulate color distortion
             ]
         },
         {
@@ -70,6 +71,8 @@
                 "3",
                 "--use_intrinsics",
                 "dict(image_width=1600,FoVx=1.4749,image_height=1200,FoVy=1.1990)",
+                "--data_dir",
+                "output/truck-restore/dataset"
             ]
         },
     ]
