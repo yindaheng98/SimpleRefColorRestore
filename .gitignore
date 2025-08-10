@@ -3,6 +3,7 @@ output
 
 gaussian_splatting/
 extrinterp/
+gscompressor/
 *.dist-info
 # Byte-compiled / optimized / DLL files
 __pycache__/
