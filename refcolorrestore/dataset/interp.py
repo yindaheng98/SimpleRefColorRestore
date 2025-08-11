@@ -2,15 +2,15 @@ from typing import Tuple
 import torch
 
 from gaussian_splatting import Camera
-from extrinterp import ExtrinsicInterpolator
+from extrinterp import ExtrinsicDataset
 
 from .abc import DualCameraDataset
 
 
-class DualExtrinsicInterpolationDataset(DualCameraDataset):
+class DualExtrinsicDataset(DualCameraDataset):
     def __init__(
         self,
-            base_dataset: ExtrinsicInterpolator,
+            base_dataset: ExtrinsicDataset,
             FoVx: float = 90.0*torch.pi/180, FoVy: float = 90.0*torch.pi/180,
             image_height: int = 1000, image_width: int = 1000, downsample=4):
         self.cameras = base_dataset
