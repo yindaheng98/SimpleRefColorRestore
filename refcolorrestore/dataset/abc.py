@@ -32,7 +32,7 @@ class RestorationTuple(NamedTuple):
 class RestorationDataset:
 
     @abstractmethod
-    def to(self, device) -> 'DualCameraDataset':
+    def to(self, device) -> 'RestorationDataset':
         return self
 
     @abstractmethod
@@ -59,7 +59,7 @@ class SavedRestorationDataset(RestorationDataset):
     def __init__(self, data_dir: str):
         self.data_dir = data_dir
 
-    def __len__(self):
+    def __len__(self) -> int:
         n = 0
         while os.path.exists(os.path.join(self.data_dir, '{0:05d}'.format(n) + ".png")) and \
                 os.path.exists(os.path.join(self.data_dir, '{0:05d}'.format(n) + ".lr.png")) and \
@@ -67,7 +67,7 @@ class SavedRestorationDataset(RestorationDataset):
             n += 1
         return n
 
-    def __getitem__(self, idx):
+    def __getitem__(self, idx) -> Tuple[RestorationTuple, torch.FloatTensor]:
         color_distorted = torchvision.io.read_image(os.path.join(self.data_dir, '{0:05d}'.format(idx) + ".png")) / 255.0
         reference = torchvision.io.read_image(os.path.join(self.data_dir, '{0:05d}'.format(idx) + ".lr.png")) / 255.0
         ground_truth = torchvision.io.read_image(os.path.join(self.data_dir, '{0:05d}'.format(idx) + ".gt.png")) / 255.0

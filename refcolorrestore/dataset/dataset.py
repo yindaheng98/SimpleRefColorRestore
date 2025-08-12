@@ -7,13 +7,13 @@ from gaussian_splatting import GaussianModel
 from .abc import DualCameraDataset, RestorationDataset, RestorationTuple
 
 
-class DualCameraRestorationDataset(RestorationDataset):
+class DualCamera2RestorationDataset(RestorationDataset):
     def __init__(self, cameras: DualCameraDataset, color_distorted_gaussians: GaussianModel, ground_truth_gaussians: GaussianModel):
         self.cameras = cameras
         self.ground_truth_gaussians = ground_truth_gaussians
         self.color_distorted_gaussians = color_distorted_gaussians
 
-    def to(self, device) -> 'DualCameraRestorationDataset':
+    def to(self, device) -> 'DualCamera2RestorationDataset':
         self.cameras = self.cameras.to(device)
         self.ground_truth_gaussians = self.ground_truth_gaussians.to(device)
         self.color_distorted_gaussians = self.color_distorted_gaussians.to(device)

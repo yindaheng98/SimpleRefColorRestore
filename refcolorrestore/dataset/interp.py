@@ -7,7 +7,7 @@ from extrinterp import ExtrinsicDataset
 from .abc import DualCameraDataset
 
 
-class DualExtrinsicDataset(DualCameraDataset):
+class Extrinsic2DualCameraDataset(DualCameraDataset):
     def __init__(
         self,
             base_dataset: ExtrinsicDataset,

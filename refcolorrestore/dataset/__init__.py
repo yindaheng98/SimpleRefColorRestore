@@ -1,3 +1,3 @@
 from .abc import DualCameraDataset, RestorationDataset, RestorationTuple, SavedRestorationDataset
-from .interp import DualExtrinsicDataset
-from .dataset import DualCameraRestorationDataset
+from .interp import Extrinsic2DualCameraDataset
+from .dataset import DualCamera2RestorationDataset

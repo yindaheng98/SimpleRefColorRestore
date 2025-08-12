@@ -5,7 +5,7 @@ from gaussian_splatting import GaussianModel
 from gaussian_splatting.dataset import CameraDataset
 from gaussian_splatting.prepare import prepare_dataset, prepare_gaussians
 from extrinterp import ExtrinsicInterpolator
-from refcolorrestore.dataset import DualExtrinsicDataset, DualCameraRestorationDataset
+from refcolorrestore.dataset import Extrinsic2DualCameraDataset, DualCamera2RestorationDataset
 
 
 def prepare_rendering(
@@ -23,7 +23,7 @@ def prepare_rendering(
             FoVx=dataset[i].FoVx, FoVy=dataset[i].FoVy)
     elif not isinstance(use_intrinsics, dict):
         raise ValueError("Invalid use_intrinsics format")
-    dataset = DualExtrinsicDataset(ExtrinsicInterpolator(dataset=dataset, n=n, window_size=window_size), **use_intrinsics)
+    dataset = Extrinsic2DualCameraDataset(ExtrinsicInterpolator(dataset=dataset, n=n, window_size=window_size), **use_intrinsics)
     gaussians = prepare_gaussians(sh_degree=sh_degree, source=source, device=device, trainable_camera=trainable_camera, load_ply=load_ply)
     gaussians_gt = prepare_gaussians(sh_degree=sh_degree, source=source, device=device, trainable_camera=trainable_camera, load_ply=load_ply_gt)
     return dataset, gaussians, gaussians_gt
@@ -57,6 +57,6 @@ if __name__ == "__main__":
             load_ply=load_ply, load_ply_gt=load_ply_gt, load_camera=args.load_camera,
             use_intrinsics=eval(args.use_intrinsics)
         )
-        dataset = DualCameraRestorationDataset(cameras=cameras, color_distorted_gaussians=gaussians, ground_truth_gaussians=gaussians_gt)
+        dataset = DualCamera2RestorationDataset(cameras=cameras, color_distorted_gaussians=gaussians, ground_truth_gaussians=gaussians_gt)
         os.makedirs(args.data_dir, exist_ok=True)
         dataset.save_dataset(args.data_dir)
