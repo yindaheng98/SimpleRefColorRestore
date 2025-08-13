@@ -2,7 +2,6 @@ from typing import Tuple
 import torch
 import os
 from gaussian_splatting import GaussianModel
-from gaussian_splatting.dataset import CameraDataset
 from gaussian_splatting.prepare import prepare_dataset, prepare_gaussians
 from extrinterp import ExtrinsicInterpolator
 from refcolorrestore.dataset import Extrinsic2DualCameraDataset, DualCamera2RestorationDataset, DualCameraDataset

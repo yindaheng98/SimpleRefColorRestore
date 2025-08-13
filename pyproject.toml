@@ -12,7 +12,7 @@ authors = [{ name = "yindaheng98", email = "yindaheng98@gmail.com" }]
 classifiers = ["Programming Language :: Python :: 3"]
 urls = { Homepage = "https://github.com/yindaheng98/SimpleRefColorRestore" }
 requires-python = ">=3"
-dependencies = ["gaussian-splatting"]
+dependencies = ["gaussian-splatting", "extrinterp"]
 
 # --- Setuptools-specific tables ---------------------------------------------
 
