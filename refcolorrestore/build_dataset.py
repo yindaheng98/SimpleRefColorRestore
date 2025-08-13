@@ -5,7 +5,7 @@ from gaussian_splatting import GaussianModel
 from gaussian_splatting.dataset import CameraDataset
 from gaussian_splatting.prepare import prepare_dataset, prepare_gaussians
 from extrinterp import ExtrinsicInterpolator
-from refcolorrestore.dataset import Extrinsic2DualCameraDataset, DualCamera2RestorationDataset
+from refcolorrestore.dataset import Extrinsic2DualCameraDataset, DualCamera2RestorationDataset, DualCameraDataset
 
 
 def prepare_rendering(
@@ -14,7 +14,7 @@ def prepare_rendering(
         load_ply: str = None, load_ply_gt: str = None,
         load_camera: str = None,
         use_intrinsics: int | dict = 0
-) -> Tuple[CameraDataset, GaussianModel]:
+) -> Tuple[DualCameraDataset, GaussianModel, GaussianModel]:
     dataset = prepare_dataset(source=source, device=device, trainable_camera=trainable_camera, load_camera=load_camera, load_depth=False)
     if isinstance(use_intrinsics, int):
         i = use_intrinsics
